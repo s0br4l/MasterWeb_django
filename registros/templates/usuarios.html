@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+
+{% if usuarios %}
+<h1> Cadastro de : {{ usuarios.nome }}
+</h1>
+<table class="table table-striped table-hover table-bordered">
+  <tr>
+    <th>
+        Dados <br/>
+    </th>
+  </tr>
+  <tr>
+    <td align="left">
+        Turma (1a opcao): {{ usuarios.turma1 }} - {{ usuarios.intervencao1 }}<br/>
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+        Turma (2a opcao): {{ usuarios.turma2 }} - {{ usuarios.intervencao2 }}<br/>
+    </td>
+  <tr>
+    <td align="left">
+        Vencimento dos exames: {{ usuarios.exames }}<br/>
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+        Doencas (Hipertensao ou Diabetes): {{ usuarios.doenca1 }}|{{ usuarios.doenca2 }}<br/>
+    </td>
+  </tr>
+  {% endif %}
+</table>
+
+
+{% endif %}
+{% endblock %}

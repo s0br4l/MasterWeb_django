@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<h1>Registro de Pressão Arterial - Pré-intervencão</h1>
+<br/><br/>
+<h3>
+{% if submitted %}
+    Pressão arterial pré-intervencão registrada com sucesso!<br/>
+<a href="{% url 'lista_pressao' %}"> Voltar para a lista</a> </h3> <br/>
+
+{% else %}
+<H5>
+<form class="mb-3 row" action="" method="POST">
+    {% csrf_token %}
+<div class="col-sm-7">
+    {{ form.as_p }}
+
+    <input type="submit" value="Registrar" class="btn btn-outline-primary">
+</div>
+
+</form>
+</H5>
+{% endif %}
+{% endif %}
+{% endblock %}

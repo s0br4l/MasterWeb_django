@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<h1>Registros de Glicemia</h1>
+<br/>
+<a href="{% url 'registro_glic_pre' %}" class="btn btn-outline-warning "> Registrar PRÉ </a>
+|
+<a href="{% url 'registro_glic_pos' %}" class="btn btn-outline-info "> Registrar PÓS </a>
+<br/><br/>
+
+<div class="m-4">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" id="myTab">
+                <li class="nav-item">
+                    <a href="#geral" class="nav-link active" data-bs-toggle="tab">Geral</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#tq7" class="nav-link" data-bs-toggle="tab">Ter|Qui|7h</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#tq8" class="nav-link" data-bs-toggle="tab">Ter|Qui|8h</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#qs7" class="nav-link" data-bs-toggle="tab">Qua|Sex|7h</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#qs8" class="nav-link" data-bs-toggle="tab">Qua|Sex|8h</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#pl7" class="nav-link" data-bs-toggle="tab">Pilates|7h</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#pl8" class="nav-link" data-bs-toggle="tab">Pilates|8h</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="geral">
+                    <h5 class="card-title">Lista completa de usuários diabeticos Master Vida</h5><br/>
+                    <p class="card-text">
+                      <table class="table table-striped table-hover table-bordered">
+                        <tr>
+                         <th scope="col" colspan="3"> NOMES </th>
+                        </tr>
+                        {%for user in lista_glicemia %}
+                        <tr>
+                          <td align="left">
+                            <a href="{% url 'usuarios' user.id %}">{{ user.nome }}</a>
+                          </td>
+                          <td align="left">
+                            <a href="{% url 'usuariosedit' user.id %}" class="btn btn-outline-secondary btn-sm"> Editar </a>
+                          </td>
+                          <td align="left">
+                            <a href="{% url 'usuarios_graf' user.id %}" class="btn btn-outline-secondary btn-sm"> Gráficos </a>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </table>
+                    </p>
+
+                </div>
+                <div class="tab-pane fade" id="tq7">
+                    <h5 class="card-title">Lista de usuários diabeticos Master Vida - Tercas e Quintas 7h </h5><br/>
+                    <p class="card-text">
+                      <table class="table table-striped table-hover table-bordered">
+                        <tr>
+                         <th scope="col" > NOMES </th>
+                         <th scope="col" colspan="2" > {{ datahoje }} </th>
+                        </tr>
+                        {% for user in lista_glicemia %}
+                            {% if user.turma1 == 'TQ7h' or user.turma2 == 'TQ7h' %}
+                            <tr>
+                              <td align="left">
+                                <a href="{% url 'usuarios' user.id %}">{{ user.nome }}</a>
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pre %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="pretq7" checked>
+                                  <label class="form-check-label" for="pretq7">
+                                    PRÉ
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pos %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="postq7" checked>
+                                  <label class="form-check-label" for="postq7">
+                                    PÓS
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                      </table>
+                    </p>
+
+                </div>
+                <div class="tab-pane fade" id="tq8">
+                    <h5 class="card-title">Lista de usuários diabeticos Master Vida - Tercas e Quintas 8h </h5><br/>
+                    <p class="card-text">
+                      <table class="table table-striped table-hover table-bordered">
+                        <tr>
+                         <th scope="col" > NOMES </th>
+                         <th scope="col" colspan="2" > {{ datahoje }} </th>
+                        </tr>
+                        {% for user in lista_glicemia %}
+                            {% if user.turma1 == 'TQ8h' or user.turma2 == 'TQ8h' %}
+                            <tr>
+                              <td align="left">
+                                <a href="{% url 'usuarios' user.id %}">{{ user.nome }}</a>
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pre %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="pretq8" checked>
+                                  <label class="form-check-label" for="pretq7">
+                                    PRÉ
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pos %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="postq8" checked>
+                                  <label class="form-check-label" for="postq7">
+                                    PÓS
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                      </table>
+                    </p>
+
+                </div>
+                <div class="tab-pane fade" id="qs7">
+                    <h5 class="card-title">Lista de usuários diabeticos Master Vida - Quartas e Sextas 7h </h5><br/>
+                    <p class="card-text">
+                      <table class="table table-striped table-hover table-bordered">
+                        <tr>
+                         <th scope="col" > NOMES </th>
+                         <th scope="col" colspan="2" > {{ datahoje }} </th>
+                        </tr>
+                        {% for user in lista_glicemia %}
+                            {% if user.turma1 == 'QS7h' or user.turma2 == 'QS7h' %}
+                            <tr>
+                              <td align="left">
+                                <a href="{% url 'usuarios' user.id %}">{{ user.nome }}</a>
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pre %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="preqs7" checked>
+                                  <label class="form-check-label" for="pretq7">
+                                    PRÉ
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pos %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="posqs7" checked>
+                                  <label class="form-check-label" for="postq7">
+                                    PÓS
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                      </table>
+                    </p>
+
+                </div>
+                <div class="tab-pane fade" id="qs8">
+                    <h5 class="card-title">Lista de usuários diabeticos Master Vida - Quartas e Sextas 8h </h5><br/>
+                    <p class="card-text">
+                      <table class="table table-striped table-hover table-bordered">
+                        <tr>
+                         <th scope="col" > NOMES </th>
+                         <th scope="col" colspan="2" > {{ datahoje }} </th>
+                        </tr>
+                        {% for user in lista_glicemia %}
+                            {% if user.turma1 == 'QS8h' or user.turma2 == 'QS8h' %}
+                            <tr>
+                              <td align="left">
+                                <a href="{% url 'usuarios' user.id %}">{{ user.nome }}</a>
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pre %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="preqs8" checked>
+                                  <label class="form-check-label" for="pretq7">
+                                    PRÉ
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pos %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="posqs8" checked>
+                                  <label class="form-check-label" for="postq7">
+                                    PÓS
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                      </table>
+                    </p>
+
+                </div>
+                <div class="tab-pane fade" id="pl7">
+                    <h5 class="card-title">Lista de usuários diabeticos Master Vida - Pilates </h5><br/>
+                    <p class="card-text">
+                      <table class="table table-striped table-hover table-bordered">
+                        <tr>
+                         <th scope="col" > NOMES </th>
+                         <th scope="col" colspan="2" > {{ datahoje }} </th>
+                        </tr>
+                        {% for user in lista_glicemia %}
+                            {% if user.turma1 == 'PL7h' or user.turma2 == 'PL7h' %}
+                            <tr>
+                              <td align="left">
+                                <a href="{% url 'usuarios' user.id %}">{{ user.nome }}</a>
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pre %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="prepl7" checked>
+                                  <label class="form-check-label" for="pretq7">
+                                    PRÉ
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pos %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="pospl7" checked>
+                                  <label class="form-check-label" for="postq7">
+                                    PÓS
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                      </table>
+                    </p>
+
+                </div>
+                <div class="tab-pane fade" id="pl8">
+                    <h5 class="card-title">Lista de usuários diabeticos Master Vida - Pilates </h5><br/>
+                    <p class="card-text">
+                      <table class="table table-striped table-hover table-bordered">
+                        <tr>
+                         <th scope="col" > NOMES </th>
+                         <th scope="col" colspan="2" > {{ datahoje }} </th>
+                        </tr>
+                        {% for user in lista_glicemia %}
+                            {% if user.turma1 == 'PL8h' or user.turma2 == 'PL8h' %}
+                            <tr>
+                              <td align="left">
+                                <a href="{% url 'usuarios' user.id %}">{{ user.nome }}</a>
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pre %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="prepl8" checked>
+                                  <label class="form-check-label" for="pretq7">
+                                    PRÉ
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                              <td align="left">
+                              {% if user.id in lista_dia_pos %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="pospl8" checked>
+                                  <label class="form-check-label" for="postq7">
+                                    PÓS
+                                  </label>
+                                </div>
+                              {% endif %}
+                              </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                      </table>
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endif %}
+{% endblock %}
