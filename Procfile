@@ -1,1 +1,1 @@
-web: gunicorn config.wsgi
+web: gunicorn --timeout 10 config.wsgi
