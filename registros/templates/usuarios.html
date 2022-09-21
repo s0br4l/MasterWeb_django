@@ -32,9 +32,10 @@
         Doencas (Hipertensao ou Diabetes): {{ usuarios.doenca1 }}|{{ usuarios.doenca2 }}<br/>
     </td>
   </tr>
-  {% endif %}
 </table>
 
+<a href="{% url 'usuariosedit' usuarios.id %}" class="btn btn-outline-secondary btn"> Editar </a>
+{% endif %}
 
 {% endif %}
 {% endblock %}

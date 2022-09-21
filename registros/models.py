@@ -43,10 +43,11 @@ class Registrosdiarios(models.Model):
     OBSERVACOES = (
         ('OP1', 'Nao fez aula'),
         ('OP2', 'Nao fez pos'),
-        ('OP3', '1a medida pressao alta'),
-        ('OP4', '1a medida pressao baixa'),
-        ('OP5', '1a medida glicemia alta'),
-        ('OP6', '1a medida glicemia baixa'),
+        ('OP3', 'Liberada, mesmo com a pressao alterada'),
+        ('OP4', '1a medida pressao alta'),
+        ('OP5', '1a medida pressao baixa'),
+        ('OP6', '1a medida glicemia alta'),
+        ('OP7', '1a medida glicemia baixa'),
     )
 
     nome = models.ForeignKey(DadosPessoais, on_delete=models.PROTECT)

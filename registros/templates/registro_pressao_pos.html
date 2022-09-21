@@ -8,8 +8,9 @@
 <br/><br/>
 <h3>
 {% if submitted %}
-    Pressão arterial pós-intervencão registrada com sucesso!<br/>
-<a href="{% url 'lista_pressao' %}"> Voltar para a lista</a> </h3> <br/>
+    Pressão arterial pós-intervencão registrada com sucesso!<br/><br/>
+<a href="{% url 'lista_pressao' %}"> Voltar para a lista</a> <br/><br/>
+<a href="{% url 'registro_pressao_pos' %}"> Registrar outro pós</a> </h3> <br/>
 
 {% else %}
 <H5>
