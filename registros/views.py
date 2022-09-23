@@ -139,6 +139,10 @@ def usuarios_graf(request, user_id):
         go.Bar(name='Pré', x=[u.data for u in usuarios], y=[u.pre_pad1 for u in usuarios]),
         go.Bar(name='Pós', x=[u.data for u in usuarios], y=[u.pos_pad1 for u in usuarios])
     ])
+    figglic = go.Figure(data=[
+        go.Bar(name='Pré', x=[u.data for u in usuarios], y=[u.pre_glic1 for u in usuarios]),
+        go.Bar(name='Pós', x=[u.data for u in usuarios], y=[u.pos_glic1 for u in usuarios])
+    ])
 
     figpas.update_layout(barmode='group',
                          title={'text': 'Pressão arterial sistólica (PAS)', 'xanchor': 'center', 'x': 0.5,
@@ -151,11 +155,17 @@ def usuarios_graf(request, user_id):
                                 'font': {'size': 22}},
                          xaxis={'title': 'Datas', 'titlefont': {'size': 18}},
                          yaxis={'title': 'PAD (mmHg)', 'titlefont': {'size': 18}, 'range': (50, 100)})
+    figglic.update_layout(barmode='group',
+                         title={'text': 'Glicemia', 'xanchor': 'center', 'x': 0.5,
+                                'font': {'size': 22}},
+                         xaxis={'title': 'Datas', 'titlefont': {'size': 18}},
+                         yaxis={'title': 'Glic (mg/dL)', 'titlefont': {'size': 18}, 'range': (50, 100)})
     grafpas = figpas.to_html()
     grafpad = figpad.to_html()
+    grafglic = figglic.to_html()
 
     return render(request, 'usuarios_graf.html', {
-        'usuarios': usuarios, 'grafpas': grafpas, 'grafpad': grafpad})
+        'usuarios': usuarios, 'grafpas': grafpas, 'grafpad': grafpad, 'grafglic': grafglic})
 
 
 def usuarios(request, user_id):
