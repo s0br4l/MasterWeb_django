@@ -19,10 +19,18 @@
                 {{ usuario.data }}
               </td>
               <td align="left">
-                {{ usuario.pre_pas1 }}/{{ usuario.pre_pad1 }} | {{ usuario.pre_glic1 }}
+                {% if usuario.pre_pas2 %}
+                  {{ usuario.pre_pas2 }}/{{ usuario.pre_pad2 }} | {{ usuario.pre_glic1 }}
+                {% else %}
+                  {{ usuario.pre_pas1 }}/{{ usuario.pre_pad1 }} | {{ usuario.pre_glic1 }}
+                {% endif %}
               </td>
               <td align="left">
-                {{ usuario.pos_pas1 }}/{{ usuario.pos_pad1 }} | {{ usuario.pos_glic1 }}
+                  {% if usuario.pos_pas2 %}
+                    {{ usuario.pos_pas2 }}/{{ usuario.pos_pad2 }} | {{ usuario.pos_glic1 }}
+                  {% else %}
+                    {{ usuario.pos_pas1 }}/{{ usuario.pos_pad1 }} | {{ usuario.pos_glic1 }}
+                  {% endif %}
               </td>
             </tr>
             {% endfor %}<br/>
